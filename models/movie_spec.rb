@@ -36,16 +36,16 @@ RSpec.describe "Movie", type: :model do
     expect(movie).not_to be_valid
   end
 
-  it "has many saved_movies" do
+  it "has many bookmarks" do
     movie = Movie.new(valid_attributes)
-    expect(movie).to respond_to(:saved_movies)
-    expect(movie.saved_movies.count).to eq(0)
+    expect(movie).to respond_to(:bookmarks)
+    expect(movie.bookmarks.count).to eq(0)
   end
 
-  it "should not be able to destroy self if has saved movies children" do
+  it "should not be able to destroy self if has bookmarks children" do
     movie = Movie.create!(valid_attributes)
     list = List.create!(name: "Drama")
-    movie.saved_movies.create(list: list, comment: "Great movie!")
+    movie.bookmarks.create(list: list, comment: "Great movie!")
 
     expect { movie.destroy }.to raise_error(ActiveRecord::InvalidForeignKey)
   end

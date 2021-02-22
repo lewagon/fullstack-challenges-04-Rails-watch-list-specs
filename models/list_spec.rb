@@ -27,10 +27,10 @@ RSpec.describe "List", type: :model do
     expect(list).not_to be_valid
   end
 
-  it "has many saved movies" do
+  it "has many bookmarks" do
     list = List.new(valid_attributes)
-    expect(list).to respond_to(:saved_movies)
-    expect(list.saved_movies.count).to eq(0)
+    expect(list).to respond_to(:bookmarks)
+    expect(list.bookmarks.count).to eq(0)
   end
 
   it "has many movies" do
@@ -38,13 +38,13 @@ RSpec.describe "List", type: :model do
     expect(list).to respond_to(:movies)
     expect(list.movies.count).to eq(0)
 
-    list.saved_movies.create(list: list, movie: titanic, comment: "Great movie!")
+    list.bookmarks.create(list: list, movie: titanic, comment: "Great movie!")
     expect(list.movies.count).to eq(1)
   end
 
   it "should destroy child saved movies when destroying self" do
     list = List.create!(valid_attributes)
-    list.saved_movies.create(list: list, movie: titanic, comment: "Great movie!")
-    expect { list.destroy }.to change { SavedMovie.count }.from(1).to(0)
+    list.bookmarks.create(list: list, movie: titanic, comment: "Great movie!")
+    expect { list.destroy }.to change { Bookmark.count }.from(1).to(0)
   end
 end
