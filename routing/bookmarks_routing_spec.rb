@@ -5,9 +5,9 @@ begin
 rescue LoadError
 end
 
-if defined?(ListsController)
+if defined?(BookmarksController)
 
-  RSpec.describe ListsController, type: :routing do
+  RSpec.describe BookmarksController, type: :routing do
     describe "routing" do
 
       it "routes to #new" do
