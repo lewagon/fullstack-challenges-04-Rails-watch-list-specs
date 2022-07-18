@@ -21,7 +21,7 @@ if defined?(BookmarksController)
     end
 
     describe "GET new" do
-      it "assigns a new bookmark to @list" do
+      it "assigns a new bookmark to @bookmark" do
         get :new, params: valid_attributes
         expect(assigns(:bookmark)).to be_a_new(Bookmark)
       end
