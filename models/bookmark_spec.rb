@@ -1,15 +1,19 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Bookmark", type: :model do
-  let (:titanic) do
+  let(:titanic) do
     Movie.create!(title: "Titanic", overview: "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later.")
   end
 
-  let (:classic_list) do
+  let :wonder_woman do
+    Movie.create!(title: "Wonder Woman 1984", overview: "Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s")
+  end
+
+  let(:classic_list) do
     List.create!(name: "Classic Movies")
   end
 
-  let (:comedy_list) do
+  let(:comedy_list) do
     List.create!(name: "Comedy")
   end
 
@@ -57,10 +61,14 @@ RSpec.describe "Bookmark", type: :model do
 
   it "is unique for a given movie/list couple" do
     Bookmark.create!(valid_attributes)
+
     bookmark = Bookmark.new(valid_attributes.merge(comment: "Award-winning"))
     expect(bookmark).not_to be_valid
 
     bookmark = Bookmark.new(valid_attributes.merge(list: comedy_list))
+    expect(bookmark).to be_valid
+
+    bookmark = Bookmark.new(valid_attributes.merge(movie: wonder_woman))
     expect(bookmark).to be_valid
   end
 end
