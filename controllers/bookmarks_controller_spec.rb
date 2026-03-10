@@ -55,7 +55,7 @@ if defined?(BookmarksController)
 
         it "re-renders the 'new' template or 'lists/show'" do
           post :create, params: invalid_attributes
-          expect(response).to render_template('new').or redirect_to(@list)
+          expect(response).to render_template('new').or render_template('lists/show')
         end
       end
     end
